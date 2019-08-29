@@ -1,0 +1,64 @@
+
+files <- list.files("planillas_priorizacion", full.names = TRUE)
+path <- "planillas_priorizacion/2019.xlsx"
+
+
+
+  # Esto funciona -----------------------------------------------------------
+hojas <- excel_sheets(path)
+output <- vector("list",length(hojas))
+names(output) <- hojas
+for (sheet in hojas) {
+ 
+  ### Leer todo
+  df <- read_excel(
+    path =  path,
+    sheet = sheet,
+    col_types = "text",
+    col_names = FALSE,
+    #.name_repair = "unique"
+  )  
+  
+  #Se descartan posibles columnas sin datos
+  df <- df %>% select_if(~ is.na(.) %>% mean < 0.9) 
+
+  ### Busca donde comienza el encabezado (Prioridad) y donde comienzan los datos (1)
+  inicio <-  integer()
+  j <- 1
+  
+  while (!length(inicio) == 2) {
+    inicio <- str_which(df[[j]], "Prioridad|^1$")
+    j <- j + 1
+    if (j==6) {
+      stop("No se encontró el inicio de la planilla")
+      break()
+    }
+  }
+  
+  
+  nombres <- leer_encabezado(df, inicio)
+  
+  ## Leer los datos sin el encabezado ----------------------------------
+  planilla <- slice(df, seq(from = inicio[[2]], to = nrow(df)))
+  
+  #Se descartan posibles filas sin datos, como explicaciones al final de la planilla
+  planilla <- planilla %>% filter(str_detect(.[[1]],"^\\d+$"))  
+  
+  ## Nombrar correctamente las columnas ----------------------------------
+  pla_nomb <- planilla %>% rename_all(~ nombres)
+  output[[sheet]] <- pla_nomb
+}
+
+## Nombrar correctamente la lista con el area FONACIDE correspondiente ----------
+areas_fonacide <- str_replace_all(hojas, 
+                                  c(".*ula.*" = "Aulas",
+                                    ".*anitari.*" = "Sanitarios", 
+                                    ".*spacio.*" = "Otros Espacios", 
+                                    ".*quipam.*" = "Equipamientos", 
+                                    ".*obiliario.*" = "Equipamientos", 
+                                    ".*limentac.*|.*scola.*" = "Alimentación escolar"))
+names(output) <- areas_fonacide
+output
+
+
+#Falta ver como cada hojas toma los valores NA (- capaz)
