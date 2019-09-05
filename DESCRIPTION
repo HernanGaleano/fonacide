@@ -2,12 +2,15 @@ Package: fonacide
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Hernán",
+           family = "Galeano",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "hernanmorel@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+Description: Set of functions to analyze investment of FONACIDE fund in Paraguay.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat
