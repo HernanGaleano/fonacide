@@ -1,16 +1,17 @@
 library(readr)
 library(dplyr)
 library(readxl)
+library(stringr)
+library(purrr)
 
+source("R/leer_planilla_priorizacion.R")
 
 # Hace una lista de archivos en la carpeta "csvs". El parámetro "full.names"
 # añade el path a la lista
-files <- list.files("csvs", full.names = TRUE)
+p <- paste(getwd(),"/data/transferencias_fonacide_csv", sep = "")
+files <- list.files(p, full.names = TRUE)
 
-files <- list.files("planillas_priorizacion", full.names = TRUE)
-path <- "planillas_priorizacion/2015.xlsx"
-
-fon_leerpriorizacion(path)
+leerpriorizacion(files[1])
 
 
 

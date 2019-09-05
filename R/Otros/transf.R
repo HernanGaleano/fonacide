@@ -84,6 +84,11 @@ completo %>%
 CDE <- completo %>% 
   filter(grepl(pattern="ciudad del este", tolower(descripcionEntidad)))
 
+#completo <-
+#  read_csv("completo.csv",
+#           locale = locale(encoding = 'ISO-8859-1'),
+#           col_types = cols())
+
 write_csv(CDE,"completo.csv")
 write_csv(CDE,"TransferenciasCDE.csv")
 

@@ -1,9 +1,11 @@
-#' Leer encabezado, excel con varias filas de encabezado 
+#' Read multi row heading
 #'
-#' @param df 
-#' @param inicio 
+#' \code{read_headings} returns a string vector with concatenated names of a multi row heading.
 #'
-#' @return
+#' @param df a tibble del cual se quiere leer el encabezado
+#' @param inicio un vector que indica números de fila donde comienza el encabezado y los datos
+#'
+#' @return un vector con los nombres
 #' @export
 #'
 #' @examples

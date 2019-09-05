@@ -1,8 +1,8 @@
 
 files <- list.files("planillas_priorizacion", full.names = TRUE)
-path <- "planillas_priorizacion/2019.xlsx"
+#path <- "planillas_priorizacion/2019.xlsx"
 
-
+path <- paste(getwd(),"/data/planillas_priorizacion/2019.xlsx", sep = "")
 
   # Esto funciona -----------------------------------------------------------
 hojas <- excel_sheets(path)

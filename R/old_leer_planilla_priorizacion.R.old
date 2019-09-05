@@ -1,13 +1,18 @@
+library(readr)
+library(dplyr)
+library(readxl)
+library(stringr)
+library(purrr)
 
 
+leerpriorizacion <- function(path) {
 
-fon_leerpriorizacion <- function(path) {
-
-
+#path <- paste(getwd(),"/planillas_priorizacion/2015.xlsx", sep = "")
 # Esto funciona -----------------------------------------------------------
-hojas <- excel_sheets(path)
-names(output) <- hojas
+hojas <- readxl::excel_sheets(path)
 output <- vector("list",length(hojas))
+names(output) <- hojas
+
 for (sheet in hojas) {
   ### Leer las primeras 20 filas para detectar dónde están los datos
   encabezado <- read_excel(path =  path,
@@ -31,7 +36,7 @@ for (sheet in hojas) {
         if (is.na(nomb[[i - 1, j]])) {
           if (is.na(nomb[[i, j - 1]])) {
             nomb[[i - 1, j]] <- nomb[[i, j]]
-            nomb[[i, j]] <- NA#nomb[[i, j - 1]] #llenar con NA
+            nomb[[i, j]] <- NA
           } else{
             nomb[[i - 1, j]] <- nomb[[i - 1, j - 1]]
           }
@@ -55,11 +60,14 @@ for (sheet in hojas) {
     trim_ws = TRUE,
     col_names = FALSE,
     col_types = NULL,
-    .name_repair = "minimal"#~ sample(letters, 1, replace = FALSE)
+    .name_repair = "universal"#~ sample(letters, 1, replace = FALSE)
   )
   #Se descartan posibles columnas sin datos
-  planilla <- planilla %>% select_if(~ is.na(.) %>% mean < 0.9) 
+  columnas_na <- planilla %>% is.na() %>% colMeans < 0.9
+  planilla <- planilla[columnas_na]
+  
   #Se descartan posibles filas sin datos, como explicaciones al final de la planilla
+  #Se decartan filas que comiencen con números en la primera columna
   planilla <- planilla %>% filter(str_detect(.[[1]],"^\\d+$"))  
   
   ## Nombrar correctamente las columnas ----------------------------------
