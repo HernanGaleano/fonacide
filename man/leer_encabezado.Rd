@@ -7,13 +7,19 @@
 leer_encabezado(df, inicio)
 }
 \arguments{
-\item{df}{a tibble del cual se quiere leer el encabezado}
+\item{df}{a tibble to read the headings from}
 
-\item{inicio}{un vector que indica números de fila donde comienza el encabezado y los datos}
+\item{start}{a numeric vector length 2 that contains the row number where the
+heading (position 1) and the data (position 2) start.}
 }
 \value{
-un vector con los nombres
+a string vector that contains the concatenated columns names in the heading.
 }
 \description{
-\code{read_headings} returns a string vector with concatenated names of a multi row heading.
+\code{read_headings} returns a string vector with concatenated names of a
+multi row heading.
+}
+\examples{
+
+
 }
