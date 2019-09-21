@@ -46,6 +46,7 @@ leer_planilla <- function(path,
     
     nombres <- leer_encabezado(df, inicio)
     nombres <- purrr::map_chr(nombres, ~ stringr::str_replace(., ".*stablecimiento.*|.*local.*", "codigo_establecimiento"))
+    nombres <- purrr::map_chr(nombres, ~ stringr::str_replace(., ".*digo de Instituc.*", "codigo_institucion"))
     cat("Nombres obtenidos.\t")
     ## Leer los datos sin el encabezado ----------------------------------
     planilla <- dplyr::slice(df, seq(from = inicio[[2]], to = nrow(df)))
