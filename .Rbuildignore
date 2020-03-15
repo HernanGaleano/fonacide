@@ -3,3 +3,7 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^\.httr-oauth$
+^data-raw$
+^analysis$
+^output$
+^figure$

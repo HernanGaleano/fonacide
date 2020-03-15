@@ -4,13 +4,11 @@
 #' multi row heading.
 #' 
 #' @param df a tibble to read the headings from
-#' @param start a numeric vector length 2 that contains the row number where the
+#' @param inicio a numeric vector length 2 that contains the row number where the
 #'   heading (position 1) and the data (position 2) start.
 #'
 #' @return a string vector that contains the concatenated columns names in the heading.
 #' @export
-#'
-#' @examples
 #'
 #'
 leer_encabezado <- function(df, inicio) {

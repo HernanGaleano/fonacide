@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# fonacide
+# rfonacide
 
 <!-- badges: start -->
 
@@ -11,7 +11,7 @@ The goal of fonacide is to …
 
 ## Installation
 
-You can install the released version of fonacide from
+You can install the released version of rfonacide from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r

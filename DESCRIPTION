@@ -1,4 +1,4 @@
-Package: fonacide
+Package: rfonacide
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
@@ -11,6 +11,13 @@ Description: Set of functions to analyze investment of FONACIDE fund in Paraguay
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
+Depends: 
+    R (>= 3.5.0)
 Suggests: 
     testthat
+Imports: 
+    dplyr,
+    purrr,
+    stringr,
+    magrittr

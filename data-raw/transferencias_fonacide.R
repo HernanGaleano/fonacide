@@ -18,7 +18,7 @@ cantidad <- length(files)
 cat("Se encontraron", cantidad, "archivos.\n")
 
 # Leer CSVs ---------------------------------------------------------------
-files <- dir("csvs/", pattern = "\\.csv$", full.names = TRUE)
+#files <- dir("transferencias_fonacide/", pattern = "\\.csv$", full.names = TRUE)
 output <- vector("list", length(files))
 for (i in seq_along(files)) {
   # Se utiliza el enconding ISO para evitar problemas con los acentos y la "ñ"

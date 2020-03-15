@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# fonacide
+# rfonacide
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -22,7 +22,7 @@ The goal of fonacide is to ...
 
 ## Installation
 
-You can install the released version of fonacide from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of rfonacide from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("fonacide")
