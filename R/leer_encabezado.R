@@ -1,24 +1,26 @@
-#' Read multi row heading
-#'
-#' \code{read_headings} returns a string vector with concatenated names of a
-#' multi row heading.
+#' Lee el encabezado de varias filas
 #' 
-#' @param df a tibble to read the headings from
-#' @param inicio a numeric vector length 2 that contains the row number where the
-#'   heading (position 1) and the data (position 2) start.
+#' \code{leer_encabezado()} devuleve un string vector con los nombres de las columnas.
+#' Concatena los nombres con las filas inferiores en caso que el encabezado tenga varias
+#' filas. Se utiliza principalmente para leer los encabezados de las planillas de 
+#' priorización.
 #'
-#' @return a string vector that contains the concatenated columns names in the heading.
+#' @param df un tibble del cual leer los encabezados
+#' @param inicio un numeric vector de tamaño 2 que contiene la posición en `df` donde
+#' empiezan el encabezado (\code{inicio[[1]]}) y los datos (\code{inicio[[1]]}).
+#'
+#' @return un string vector con los nombres de las columnas.
 #' @export
-#'
+#' @encoding UTF-8
 #'
 leer_encabezado <- function(df, inicio) {
-  ## Leer nombre de columnas ----------------------------------
-  ### Subset del nombre de las columnas
+  # Extrae el encabezado del df
   encabezado <- dplyr::slice(df, seq(from = inicio[[1]], to = inicio[[2]] - 1))
 
-  ### Rellena las celdas vacías que quedan de las celdas combinadas
-  m <- dim(encabezado)[[1]] # numero de filas
-  n <- dim(encabezado)[[2]] # numero de columnas
+  # Rellena las celdas vacías resultantes de las celdas combinadas para poder
+  # concatenar después
+  m <- dim(encabezado)[[1]] # número de filas
+  n <- dim(encabezado)[[2]] # número de columnas
   for (i in m:2) {
     for (j in 1:n) {
       if (!is.na(encabezado[[i, j]])) {
@@ -33,21 +35,19 @@ leer_encabezado <- function(df, inicio) {
       }
     }
   }
-  ### En caso de que todavía existan celdas vacias en la primera fila de encabezado
-  ### Para Franco-2014-Otros Espacios
-  existe_NA <- is.na(encabezado[1, ]) %>% mean
+  
+  # En algunas planillas como "Franco-2014-Otros Espacios" todavía existan celdas vacias
+  # en la primera fila de encabezado después del código anterior. Se verifica y 
+  # rellenan estas celdas.
+  existe_NA <- is.na(encabezado[1, ]) %>% mean()
   if (existe_NA != 0) {
     for (j in 1:n) {
       if (is.na(encabezado[[1, j]])) {
-        encabezado[[1, j]] <- paste0(encabezado[[1, j-1]], j)
+        encabezado[[1, j]] <- paste0(encabezado[[1, j - 1]], j)
       }
     }
   }
-  
-  
-  
-  
-  ### Concatenación del encabezado para nombres de columnas
+  # Concatenación del encabezado para nombres de columnas
   nombres <-
     purrr::map_chr(encabezado, ~ na.omit(.) %>%
       stringr::str_c(collapse = " - ")) %>%

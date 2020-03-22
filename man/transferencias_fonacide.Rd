@@ -4,7 +4,9 @@
 \name{transferencias_fonacide}
 \alias{transferencias_fonacide}
 \title{Montos de Transferencias de FONACIDE}
-\format{A data frame with 53940 rows and 10 variables:}
+\format{
+A data frame with 53940 rows and 10 variables:
+}
 \usage{
 transferencias_fonacide
 }

@@ -2,4 +2,6 @@
 
 export("%>%")
 export(leer_encabezado)
+export(leer_planilla)
 importFrom(magrittr,"%>%")
+importFrom(rlang,.data)

@@ -1,4 +1,4 @@
 library(testthat)
-library(fonacide)
+library(rfonacide)
 
-test_check("fonacide")
+test_check("rfonacide")
